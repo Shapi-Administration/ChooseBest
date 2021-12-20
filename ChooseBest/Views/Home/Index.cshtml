@@ -1,80 +1,37 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @using ChooseBest.Data
 @{
-	var bplayer = ViewData["BestPlayer"] as Player;
-	var bteam = ViewData["BestTeam"] as Team;
-	var btrainer = ViewData["BestTrainer"] as Trainer;
+    var bplayer = ViewData["BestPlayer"] as Player;
+    var bteam = ViewData["BestTeam"] as Team;
+    var btrainer = ViewData["BestTrainer"] as Trainer;
 
 
 }
 @inject IViewLocalizer Localizer;
 
 <div class="container marketing">
-	<div class="row">
-		<div class="col-lg-4">
-			<img class="bd-placeholder-img rounded-circle" width="140" height="140" src="https://icdn.lenta.ru/images/2020/09/14/20/20200914202404058/square_320_7c581d233fe273e3b06d874fd900b267.jpg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect>
+    <div class="row">
+        <div class="col-lg-4">
+            <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="https://icdn.lenta.ru/images/2020/09/14/20/20200914202404058/square_320_7c581d233fe273e3b06d874fd900b267.jpg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect>
 
-			<h2>@Localizer["Choosing the best player"]</h2>
-			<p>@Localizer["Vote for the best player in your opinion by clicking the button below"]</p>
-			<p><a class="btn btn-secondary" asp-controller="Vote" asp-route-display="player">@Localizer["Details"]</a></p>
-		</div>
-		<div class="col-lg-4">
-			<img class="bd-placeholder-img rounded-circle" width="140" height="140" src="https://psv4.userapi.com/c240331/u141259278/docs/d35/e6afe446bb8e/football-team-11-players.jpg?extra=lRQ0EsLhA_Y2caengctO0GWY8YiwDy93KwpmAEoslIJ3pW8XM8nfgTi7yjPp4tMUPRVPStaSZNZ5RaLWcv0ZXHY_C1iDb9oX07LGVx6XZ6mK7datMufl4SMT1vyg6C92HuxGdQS0PGbqzW1GRBI6YC5ydly-" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <h2>@Localizer["Choosing the best player"]</h2>
+            <p>@Localizer["Vote for the best player in your opinion by clicking the button below"]</p>
+            <p><a class="btn btn-secondary" asp-controller="Vote" asp-route-display="player">@Localizer["Details"]</a></p>
+        </div>
+        <div class="col-lg-4">
+            <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="https://static.nike.com/a/images/f_auto/dpr_3.0,cs_srgb/w_371,c_limit/a76a7bba-36d1-4637-97ec-1ecfbfcfc547/-.png" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
 
-			<h2>@Localizer["Choosing the best team"]</h2>
-			<p>@Localizer["Vote for the best team in your opinion by clicking the button below"]</p>
-			<p><a class="btn btn-secondary" asp-controller="Vote" asp-route-display="team">@Localizer["Details"]</a></p>
-		</div>
-		<div class="col-lg-4">
-			<img class="bd-placeholder-img rounded-circle" width="140" height="140" src="https://psv4.userapi.com/c240331/u141259278/docs/d23/ccf81c4ba88b/772168edc37f674c364cdd2aa6bf71e6.jpg?extra=lcw8EGCusOR6uXdHm7UIjZLzZUMG2NHt-LHdvaX37Tw2KDfiS0XF3s8HMxpxx4ngFTeRCvoNGQ0n4jWBSqdHKC0CuyiL-M6D8E3W4PKYemLU_9Hk7FmLLeGseZyaGma6Q9zByMG-F1IX9d5ue7v0Xg6P67ar" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <h2>@Localizer["Choosing the best team"]</h2>
+            <p>@Localizer["Vote for the best team in your opinion by clicking the button below"]</p>
+            <p><a class="btn btn-secondary" asp-controller="Vote" asp-route-display="team">@Localizer["Details"]</a></p>
+        </div>
+        <div class="col-lg-4">
+            <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="data:image/jpeg;base64,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"role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
 
-			<h2>@Localizer["Choosing the best coach"]</h2>
-			<p>@Localizer["Vote for the best coach in your opinion by clicking the button below"]</p>
-			<p><a class="btn btn-secondary" asp-controller="Vote" asp-route-display="trainer">@Localizer["Details"]</a></p>
-		</div>
-	</div>
+      <h2>@Localizer["Choosing the best coach"]</h2>
+      <p>@Localizer["Vote for the best coach in your opinion by clicking the button below"]</p>
+      <p><a class="btn btn-secondary" asp-controller="Vote" asp-route-display="trainer">@Localizer["Details"]</a></p>
+    </div>
+  </div>
 
-	<hr class="featurette-divider">
-
-	<div class="row featurette">
-		<div class="col-md-7">
-			<h2 class="featurette-heading">@Localizer["Leading player by votes:"]</h2>
-			<h4 class="lead">@bplayer.Name , @Localizer["Age:"] @bplayer.Age</h4>
-			<span>@Localizer["Votes:"] @bplayer.Votes</span>
-		</div>
-		<div class="col-md-5">
-			<img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="@bplayer.Img" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"/>
-
-		</div>
-	</div>
-
-	<hr class="featurette-divider">
-
-	<div class="row featurette">
-		<div class="col-md-7 order-md-2">
-			<h2 class="featurette-heading">@Localizer["Leading team in terms of votes:"]</h2>
-			<h4 class="lead">@bteam.Name</h4>
-			<span>@Localizer["Votes:"] @bteam.Votes</span>
-		</div>
-		<div class="col-md-5 order-md-1">
-			<img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="@bteam.Img" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
-
-		</div>
-	</div>
-
-	<hr class="featurette-divider">
-
-	<div class="row featurette">
-		<div class="col-md-7">
-			<h2 class="featurette-heading">@Localizer["Leading voice coach:"]</h2>
-			<h4 class="lead">@btrainer.Name , @btrainer.Age лет</h4>
-			<span>@Localizer["Votes:"] @btrainer.Votes</span>
-		</div>
-		<div class="col-md-5">
-			<img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="@btrainer.Img" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
-
-		</div>
-	</div>
-
-	<hr class="featurette-divider">
-</div>
+  <hr class="featurette-divider"> 
