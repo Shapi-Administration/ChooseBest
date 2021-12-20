@@ -1,0 +1,114 @@
+﻿@using ChooseBest.Areas.Identity.Data
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization
+@inject SignInManager<User> signInManager;
+@inject IViewLocalizer Localizer;
+@{
+	//CultureInfo.CurrentCulture = new CultureInfo("en-US"); CultureInfo.CurrentUICulture = new CultureInfo("en-US");
+	var players = ViewData["Players"] as IQueryable<Player>;
+	var teams = ViewData["Teams"] as IQueryable<Team>;
+	var trainers = ViewData["Trainers"] as IQueryable<Trainer>;
+	var user = await signInManager.UserManager.GetUserAsync(User);
+}
+
+<div class="album py-5 bg-light">
+	<div class="container">
+		@if (User.IsInRole("Admin"))
+		{
+			<a asp-action="CreatePlayer">CreatePlayer</a>
+			<a asp-action="CreateTeam">CreateTeam</a>
+			<a asp-action="CreateTrainer">CreateTrainer</a>
+		}
+
+		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+			@if (players != null)
+			{
+				@foreach (var player in players)
+				{
+					<div class="col">
+						<div class="card shadow-sm">
+							<img class="card-img-top img-fluid" style="width:400px;height:auto" src="@player.Img" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false" />
+
+							<div class="card-body">
+								<h4>@player.Name @player.Age лет</h4>
+								<h4>@player.TeamInfo</h4>
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="btn-group">
+										@if(user == null)
+										{
+											<a type="button"class="btn btn-sm btn-outline-danger" asp-area="Identity" asp-page="/Account/Login">@Localizer["Log in to vote"]</a>
+										}
+										else if (!user.VotePlayer)
+										{
+											<a type="button" asp-action="MakeVote" asp-route-id="@player.Id" asp-route-type="player" class="btn btn-sm btn-outline-danger">@Localizer["Vote"]</a>
+										}
+										
+									</div>
+									<small class="text-muted">@Localizer["Votes:"] @player.Votes</small>
+								</div>
+							</div>
+						</div>
+					</div>
+				}
+			}
+			@if (teams != null)
+			{
+				@foreach (var team in teams)
+				{
+					<div class="col">
+						<div class="card shadow-sm">
+							<img class="card-img-top img-fluid" style="width:400px;height:auto" src="@team.Img" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false" />
+
+							<div class="card-body">
+								<h4>@team.Name</h4>
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="btn-group">
+										@if(user == null)
+										{
+											<a type="button"class="btn btn-sm btn-outline-danger" asp-area="Identity" asp-page="/Account/Login">@Localizer["Log in to vote"]</a>
+										}
+										else if (user != null && !user.VoteTeam)
+										{
+											<a type="button" asp-action="MakeVote" asp-route-id="@team.Id" asp-route-type="team" class="btn btn-sm btn-outline-danger">@Localizer["Vote"]</a>
+										}
+									</div>
+									<small class="text-muted">@Localizer["Votes:"] @team.Votes</small>
+								</div>
+							</div>
+						</div>
+					</div>
+				}
+			}
+			@if (trainers != null)
+			{
+				@foreach (var trainer in trainers)
+				{
+					<div class="col">
+						<div class="card shadow-sm">
+							<img class="bd-placeholder-img card-img-top" style="width:400px;height:auto" src="@trainer.Img" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false" /><rect width="100%" height="100%" fill="#55595c"></rect>
+
+							<div class="card-body">
+								<h4>@trainer.Name @trainer.Age лет</h4>
+								<h4>@trainer.TeamInfo</h4>
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="btn-group">
+										@if(user == null)
+										{
+											<a type="button"class="btn btn-sm btn-outline-danger" asp-area="Identity" asp-page="/Account/Login">@Localizer["Log in to vote"]</a>
+										}
+										else if (user != null && !user.VoteTrainer)
+										{
+											<a type="button" asp-action="MakeVote" asp-route-id="@trainer.Id" asp-route-type="trainer" class="btn btn-sm btn-outline-danger">@Localizer["Vote"]</a>
+										}
+									</div>
+									<small class="text-muted">@Localizer["Votes:"] @trainer.Votes </small>
+								</div>
+							</div>
+						</div>
+					</div>
+				}
+			}
+		</div>
+	</div>
+</div>

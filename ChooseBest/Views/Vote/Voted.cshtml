@@ -1,0 +1,67 @@
+﻿@using ChooseBest.Areas.Identity.Data
+@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization
+@model User
+@inject IViewLocalizer Localizer;
+@{
+	var players = ViewData["Players"] as IEnumerable<Player>;
+	var teams = ViewData["Teams"] as IEnumerable<Team>;
+	var trainers = ViewData["Trainers"] as IEnumerable<Trainer>;
+
+	var chosenplayer = Model?.ChosenPlayer != null ? players?.First(m => m.Id == Model?.ChosenPlayer) : null;
+	var chosenteam = Model?.ChosenTeam != null ? teams?.First(m => m.Id == Model?.ChosenTeam) : null;
+	var chosentrainer = Model?.ChosenTrainer != null ? trainers?.First(m => m.Id == Model?.ChosenTrainer) : null;
+
+	//CultureInfo.CurrentCulture = new CultureInfo("en-US"); CultureInfo.CurrentUICulture = new CultureInfo("en-US");
+}
+<div class="container py-4">
+	<div class="p-5 mb-4 bg-light rounded-3">
+		<div class="container-fluid py-5">
+			@if (chosenplayer != null)
+			{
+				<h1 class="display-5 fw-bold">@Localizer["Player of your choice:"]</h1>
+				<p class="col-md-8 fs-4"><partial name="onePlayer" model="@chosenplayer" /></p>
+				<a class="btn btn-primary btn-lg" type="button" asp-action="Revote" asp-route-type="player">@Localizer["Re-vote"]</a>
+			}
+			else
+			{
+				<h1 class="display-5 fw-bold">@Localizer["You have not voted for a player yet!"]</h1>
+				<a class="btn btn-primary btn-lg" type="button" asp-controller="Vote" asp-action="Index" asp-route-display="player">@Localizer["Vote"]</a>
+			}
+		</div>
+	</div>
+
+	<div class="p-5 mb-4 bg-light rounded-3">
+		<div class="container-fluid py-5">
+			@if (chosenteam != null)
+			{
+				<h1 class="display-5 fw-bold">@Localizer["The command of your choice:"]</h1>
+				<p class="col-md-8 fs-4"><partial name="oneTeam" model="@chosenteam" /></p>
+				<a class="btn btn-primary btn-lg" type="button" asp-action="Revote" asp-route-type="team">@Localizer["Re-vote"]</a>
+			}
+			else
+			{
+				<h1 class="display-5 fw-bold">@Localizer["You have not voted for the team yet!"]</h1>
+				<a class="btn btn-primary btn-lg" type="button" asp-controller="Vote" asp-action="Index" asp-route-display="team">@Localizer["Vote"]</a>
+			}
+		</div>
+	</div>
+
+	<div class="p-5 mb-4 bg-light rounded-3">
+		<div class="container-fluid py-5">
+			@if (chosentrainer != null)
+			{
+				<h1 class="display-5 fw-bold">@Localizer["Coach of your choice:"]</h1>
+				<p class="col-md-8 fs-4"><partial name="oneTrainer" model="@chosentrainer" /></p>
+				<a class="btn btn-primary btn-lg" type="button" asp-action="Revote" asp-route-type="trainer">@Localizer["Re-vote"]</a>
+			}
+			else
+			{
+				<h1 class="display-5 fw-bold">@Localizer["Вы еще не голосовали за тренера!"]</h1>
+				<a class="btn btn-primary btn-lg" type="button" asp-controller="Vote" asp-action="Index" asp-route-display="trainer">@Localizer["Vote"]</a>
+			}
+		</div>
+	</div>
+
+
+</div>

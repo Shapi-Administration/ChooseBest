@@ -1,0 +1,60 @@
+﻿@{
+	//admin@admin.com
+	//Admin1111
+}
+@{
+	ViewData["Title"] = "Главная";
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"]</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/ChooseBest.styles.css" asp-append-version="true" />
+	<link href="/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<link rel="stylesheet" href="carousel.css">
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+			<div class="container-fluid">
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<ul class="navbar-nav me-auto mb-2 mb-md-0">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="Index">Главная</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" asp-controller="Vote" asp-action="Voted">Мой голос</a>
+						</li>
+					</ul>
+					<div class="d-flex text-white">
+						<partial name="_LoginPartial" />
+					</div>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<div class="container">
+		<main role="main" class="m-3">
+			<br /><br /><br />
+			@RenderBody()
+			<br /><br /><br />
+		</main>
+	</div>
+
+
+	<footer class="container">
+		<p class="float-end"><a href="#">Наверх</a></p>
+		<p>© 2021 </p>
+	</footer>
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

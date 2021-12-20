@@ -1,0 +1,22 @@
+﻿@model Team
+
+<div class="card shadow-sm" style="width:400px;height:auto">
+	<img class="card-img-top img-fluid" style="width:400px;height:auto" src="@Model.Img" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false" />
+
+	<div class="card-body">
+		<h4>@Model.Name</h4>
+		<p class="card-text">
+			@*@Model.Info*@
+		</p>
+		<div class="d-flex justify-content-between align-items-center">
+			<div class="btn-group">
+				<button type="button" class="btn btn-sm btn-outline-info">Подробнее</button>
+				@*@if (user!=null && !user.VoteTeam)
+					{
+					<a type="button" asp-action="MakeVote" asp-route-id="@Model.Id" asp-route-type="Model" class="btn btn-sm btn-outline-danger">Проголосовать</a>
+					}*@
+			</div>
+			<small class="text-muted">Голосов: @Model.Votes</small>
+		</div>
+	</div>
+</div>

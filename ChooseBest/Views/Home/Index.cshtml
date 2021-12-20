@@ -1,0 +1,80 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using ChooseBest.Data
+@{
+	var bplayer = ViewData["BestPlayer"] as Player;
+	var bteam = ViewData["BestTeam"] as Team;
+	var btrainer = ViewData["BestTrainer"] as Trainer;
+
+
+}
+@inject IViewLocalizer Localizer;
+
+<div class="container marketing">
+	<div class="row">
+		<div class="col-lg-4">
+			<img class="bd-placeholder-img rounded-circle" width="140" height="140" src="https://icdn.lenta.ru/images/2020/09/14/20/20200914202404058/square_320_7c581d233fe273e3b06d874fd900b267.jpg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect>
+
+			<h2>@Localizer["Choosing the best player"]</h2>
+			<p>@Localizer["Vote for the best player in your opinion by clicking the button below"]</p>
+			<p><a class="btn btn-secondary" asp-controller="Vote" asp-route-display="player">@Localizer["Details"]</a></p>
+		</div>
+		<div class="col-lg-4">
+			<img class="bd-placeholder-img rounded-circle" width="140" height="140" src="https://psv4.userapi.com/c240331/u141259278/docs/d35/e6afe446bb8e/football-team-11-players.jpg?extra=lRQ0EsLhA_Y2caengctO0GWY8YiwDy93KwpmAEoslIJ3pW8XM8nfgTi7yjPp4tMUPRVPStaSZNZ5RaLWcv0ZXHY_C1iDb9oX07LGVx6XZ6mK7datMufl4SMT1vyg6C92HuxGdQS0PGbqzW1GRBI6YC5ydly-" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+			<h2>@Localizer["Choosing the best team"]</h2>
+			<p>@Localizer["Vote for the best team in your opinion by clicking the button below"]</p>
+			<p><a class="btn btn-secondary" asp-controller="Vote" asp-route-display="team">@Localizer["Details"]</a></p>
+		</div>
+		<div class="col-lg-4">
+			<img class="bd-placeholder-img rounded-circle" width="140" height="140" src="https://psv4.userapi.com/c240331/u141259278/docs/d23/ccf81c4ba88b/772168edc37f674c364cdd2aa6bf71e6.jpg?extra=lcw8EGCusOR6uXdHm7UIjZLzZUMG2NHt-LHdvaX37Tw2KDfiS0XF3s8HMxpxx4ngFTeRCvoNGQ0n4jWBSqdHKC0CuyiL-M6D8E3W4PKYemLU_9Hk7FmLLeGseZyaGma6Q9zByMG-F1IX9d5ue7v0Xg6P67ar" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+			<h2>@Localizer["Choosing the best coach"]</h2>
+			<p>@Localizer["Vote for the best coach in your opinion by clicking the button below"]</p>
+			<p><a class="btn btn-secondary" asp-controller="Vote" asp-route-display="trainer">@Localizer["Details"]</a></p>
+		</div>
+	</div>
+
+	<hr class="featurette-divider">
+
+	<div class="row featurette">
+		<div class="col-md-7">
+			<h2 class="featurette-heading">@Localizer["Leading player by votes:"]</h2>
+			<h4 class="lead">@bplayer.Name , @Localizer["Age:"] @bplayer.Age</h4>
+			<span>@Localizer["Votes:"] @bplayer.Votes</span>
+		</div>
+		<div class="col-md-5">
+			<img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="@bplayer.Img" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"/>
+
+		</div>
+	</div>
+
+	<hr class="featurette-divider">
+
+	<div class="row featurette">
+		<div class="col-md-7 order-md-2">
+			<h2 class="featurette-heading">@Localizer["Leading team in terms of votes:"]</h2>
+			<h4 class="lead">@bteam.Name</h4>
+			<span>@Localizer["Votes:"] @bteam.Votes</span>
+		</div>
+		<div class="col-md-5 order-md-1">
+			<img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="@bteam.Img" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+		</div>
+	</div>
+
+	<hr class="featurette-divider">
+
+	<div class="row featurette">
+		<div class="col-md-7">
+			<h2 class="featurette-heading">@Localizer["Leading voice coach:"]</h2>
+			<h4 class="lead">@btrainer.Name , @btrainer.Age лет</h4>
+			<span>@Localizer["Votes:"] @btrainer.Votes</span>
+		</div>
+		<div class="col-md-5">
+			<img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="@btrainer.Img" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+		</div>
+	</div>
+
+	<hr class="featurette-divider">
+</div>
